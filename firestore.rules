@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Solo questi indirizzi email possono modificare il sito (admin).
+    // Sostituisci con l'email che usi per entrare nel pannello.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in ['SOSTITUISCI_CON_EMAIL_ADMIN@esempio.it'];
+    }
+
+    // Partite: tutti leggono, solo admin scrive
+    match /partite/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Foto: tutti leggono, solo admin scrive
+    match /foto/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Messaggi: tutti possono INVIARE (con controlli), solo admin legge/gestisce
+    match /messaggi/{id} {
+      allow create: if request.resource.data.keys().hasAll(['nome','email','messaggio','letto','creato'])
+        && request.resource.data.keys().hasOnly(['nome','email','telefono','messaggio','letto','creato'])
+        && request.resource.data.nome is string
+        && request.resource.data.nome.size() > 0 && request.resource.data.nome.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 3 && request.resource.data.email.size() <= 150
+        && request.resource.data.messaggio is string
+        && request.resource.data.messaggio.size() > 0 && request.resource.data.messaggio.size() <= 2000
+        && (!('telefono' in request.resource.data) || (request.resource.data.telefono is string && request.resource.data.telefono.size() <= 40))
+        && request.resource.data.letto == false
+        && request.resource.data.creato == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

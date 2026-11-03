@@ -145,6 +145,22 @@ nav{display:flex;justify-content:space-between;align-items:center;height:78px}
 .info b{display:block;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--arancio);margin-bottom:.4rem}
 .info span{color:var(--grigio)}
 
+
+/* Form contatti + risultati */
+.m.fatta{opacity:.7}
+.m .ris{font-family:'Anton';font-size:1.5rem;background:var(--nero);color:#fff;padding:.2rem .9rem;border-radius:8px;white-space:nowrap}
+.cal h3.sub{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.6rem;margin:3rem 0 .5rem}
+.form{margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--linea);max-width:720px}
+.form h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:2.2rem;margin-bottom:1.4rem}
+.form .r{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form input,.form textarea{width:100%;background:var(--grafite);border:2px solid var(--linea);color:#fff;border-radius:12px;padding:.95rem 1.1rem;font:inherit;transition:border-color .2s}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--arancio)}
+.form textarea{min-height:140px;resize:vertical;margin-bottom:1rem}
+.form button{border:0;cursor:pointer;font-family:inherit}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form .esito{margin-top:1rem;font-weight:600}
+.form .esito.ok{color:#3ecf6e}.form .esito.err{color:#ff7a6e}
+
 /* FOOTER */
 footer{border-top:1px solid var(--linea);padding:2.5rem 0;color:var(--grigio);font-size:.85rem}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
@@ -168,9 +184,10 @@ footer img{width:46px}
   .valori,.cal{padding:8rem 0}
   .promo-grid,.inizia-top,.perche,.passi{grid-template-columns:1fr;gap:2rem}
   .inizia{padding:8rem 0}
+  .form .r{grid-template-columns:1fr}
   .m{grid-template-columns:80px 1fr;gap:.8rem 1rem}
   .m .d{font-size:1.9rem}
-  .m .tag{grid-column:2;justify-self:start}
+  .m .tag,.m .ris{grid-column:2;justify-self:start}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -313,10 +330,8 @@ footer img{width:46px}
   <div class="wrap">
     <div class="kicker reveal">In vasca</div>
     <h2 class="display reveal" style="margin-bottom:3rem">Calendario</h2>
-    <div class="m reveal"><span class="d">-- / --</span><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Casa</span></div>
-    <div class="m reveal"><span class="d">-- / --</span><div><h3>Avversario vs Roma De Virtute</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Trasferta</span></div>
-    <div class="m reveal"><span class="d">-- / --</span><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Casa</span></div>
-    <p class="nota">Le date delle prossime partite verranno pubblicate a breve.</p>
+    <div id="partite"></div>
+    <p class="nota" id="notaPartite">Le date delle prossime partite verranno pubblicate a breve.</p>
   </div>
 </section>
 
@@ -330,6 +345,15 @@ footer img{width:46px}
       <div><b>Direttore sportivo</b><a href="tel:+393479292955"><span>Adriano Caresta<br>347 929 2955</span></a></div>
       <div><b>Social</b><span><a href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">Instagram @devirtuteroma</a><br><a href="https://www.youtube.com/@devirtuteroma" target="_blank" rel="noopener">YouTube @devirtuteroma</a></span></div>
     </div>
+
+    <form class="form reveal" id="formMsg" novalidate>
+      <h3>Scrivici un messaggio</h3>
+      <div class="r"><input name="nome" type="text" placeholder="Nome e cognome" maxlength="100" required><input name="email" type="email" placeholder="Email" maxlength="150" required></div>
+      <div class="r"><input name="telefono" type="tel" placeholder="Telefono (facoltativo)" maxlength="40"><input name="web" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+      <textarea name="messaggio" placeholder="Il tuo messaggio: età, se hai già giocato, cosa vuoi sapere…" maxlength="2000" required></textarea>
+      <button class="btn" type="submit">Invia messaggio <span>→</span></button>
+      <p class="esito" id="esitoMsg" role="status"></p>
+    </form>
   </div>
 </section>
 
@@ -340,19 +364,107 @@ footer img{width:46px}
   </div>
 </footer>
 
+<script type="module">
+import { firebaseConfig, configurato } from './firebase-config.js';
+
+const io2 = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}}),{threshold:.1});
+const reveal = el => { el.classList.add('reveal'); io2.observe(el); };
+
+/* ---- Galleria di riserva (foto statiche in assets/instagram) ---- */
+function galleriaStatica(){
+  const gal=document.getElementById('gal'); gal.replaceChildren();
+  for(let i=1;i<=8;i++){
+    const a=document.createElement('a');
+    a.href=i<=2?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
+    const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
+    img.onerror=()=>a.remove();
+    a.appendChild(img);gal.appendChild(a);
+  }
+}
+galleriaStatica();
+
+/* ---- Partite ---- */
+function rigaPartita(p, fatta){
+  const [y,m,d]=p.data.split('-');
+  const casa=p.tipo==='casa';
+  const m1=document.createElement('div'); m1.className='m reveal in'+(fatta?' fatta':'');
+  const dd=document.createElement('span'); dd.className='d'; dd.textContent=d+' / '+m;
+  const c=document.createElement('div');
+  const h=document.createElement('h3'); h.textContent=casa?'Roma De Virtute vs '+p.avversario:p.avversario+' vs Roma De Virtute';
+  const pp=document.createElement('p'); pp.textContent=[p.squadra,p.ora?'ore '+p.ora:'',p.luogo].filter(Boolean).join(' · ');
+  c.append(h,pp);
+  const t=document.createElement('span');
+  if(fatta&&p.risultato){t.className='ris';t.textContent=p.risultato}else{t.className='tag';t.textContent=casa?'Casa':'Trasferta'}
+  m1.append(dd,c,t); return m1;
+}
+async function caricaPartite(db, fs){
+  const snap=await fs.getDocs(fs.query(fs.collection(db,'partite'),fs.orderBy('data','asc')));
+  const tutte=snap.docs.map(d=>d.data());
+  const oggi=new Date().toISOString().slice(0,10);
+  const prossime=tutte.filter(p=>p.data>=oggi).slice(0,6);
+  const passate=tutte.filter(p=>p.data<oggi&&p.risultato).reverse().slice(0,4);
+  const box=document.getElementById('partite'); box.replaceChildren();
+  prossime.forEach(p=>box.append(rigaPartita(p,false)));
+  if(passate.length){
+    const h=document.createElement('h3');h.className='sub';h.textContent='Ultimi risultati';box.append(h);
+    passate.forEach(p=>box.append(rigaPartita(p,true)));
+  }
+  document.getElementById('notaPartite').style.display=prossime.length?'none':'';
+}
+
+/* ---- Foto ---- */
+async function caricaFoto(db, fs){
+  const snap=await fs.getDocs(fs.query(fs.collection(db,'foto'),fs.orderBy('creato','desc'),fs.limit(12)));
+  if(snap.empty) return;
+  const gal=document.getElementById('gal'); gal.replaceChildren();
+  snap.docs.forEach(d=>{
+    const f=d.data(); const a=document.createElement('a');
+    a.href=f.url;a.target='_blank';a.rel='noopener';
+    const img=new Image();img.alt='Foto Roma De Virtute';img.loading='lazy';img.src=f.url;
+    a.appendChild(img);gal.appendChild(a);
+  });
+}
+
+/* ---- Messaggi ---- */
+function formMessaggi(getDb, fs){
+  const form=document.getElementById('formMsg'), esito=document.getElementById('esitoMsg');
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const f=new FormData(form);
+    esito.className='esito';
+    if(f.get('web')) return;                       // anti-spam (campo nascosto)
+    const nome=f.get('nome').trim(), email=f.get('email').trim(), tel=f.get('telefono').trim(), msg=f.get('messaggio').trim();
+    if(!nome||!/^\S+@\S+\.\S+$/.test(email)||!msg){esito.classList.add('err');esito.textContent='Compila nome, email valida e messaggio.';return}
+    const db=getDb();
+    if(!db){esito.classList.add('err');esito.textContent='Invio non disponibile al momento: scrivici su Instagram o chiamaci.';return}
+    const btn=form.querySelector('button'); btn.disabled=true;
+    try{
+      const dati={nome,email,messaggio:msg,letto:false,creato:fs.serverTimestamp()};
+      if(tel) dati.telefono=tel;
+      await fs.addDoc(fs.collection(db,'messaggi'),dati);
+      form.reset();esito.classList.add('ok');esito.textContent='Messaggio inviato! Ti risponderemo presto. 🐯';
+    }catch(err){esito.classList.add('err');esito.textContent='Errore nell\'invio. Riprova o scrivici su Instagram.'}
+    btn.disabled=false;
+  });
+}
+
+/* ---- Avvio Firebase (solo se configurato) ---- */
+let db=null, fs=null;
+if(configurato){
+  try{
+    const [{initializeApp}, firestore]=await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js')]);
+    fs=firestore; db=fs.getFirestore(initializeApp(firebaseConfig));
+    caricaPartite(db,fs).catch(console.warn);
+    caricaFoto(db,fs).catch(console.warn);
+  }catch(e){console.warn('Firebase non disponibile',e)}
+}
+formMessaggi(()=>db, fs);
+</script>
 <script>
 document.getElementById('anno').textContent=new Date().getFullYear();
 document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
-
-// Galleria: carica assets/instagram/foto-N.jpg, se manca mostra un riquadro con il logo
-const gal=document.getElementById('gal');
-for(let i=1;i<=8;i++){
-  const a=document.createElement('a');
-  a.href=i<=2?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
-  const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
-  img.onerror=()=>a.remove();
-  a.appendChild(img);gal.appendChild(a);
-}
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
