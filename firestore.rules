@@ -6,7 +6,7 @@ service cloud.firestore {
     // Sostituisci con l'email che usi per entrare nel pannello.
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email in ['SOSTITUISCI_CON_EMAIL_ADMIN@esempio.it'];
+        && request.auth.token.email in ['devirtude@gmail.com'];
     }
 
     // Partite: tutti leggono, solo admin scrive
