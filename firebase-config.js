@@ -5,12 +5,12 @@
 //  (Questi dati NON sono segreti: la sicurezza è nelle regole Firestore/Storage.)
 // ============================================================
 export const firebaseConfig = {
-  apiKey: "INSERISCI_API_KEY",
-  authDomain: "INSERISCI_PROJECT_ID.firebaseapp.com",
-  projectId: "INSERISCI_PROJECT_ID",
-  storageBucket: "INSERISCI_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "INSERISCI",
-  appId: "INSERISCI"
+  apiKey: "AIzaSyBqbUWbniNp6LLO_EIaspsiWn_GPmjZxeU",
+  authDomain: "devirtude-d1a3b.firebaseapp.com",
+  projectId: "devirtude-d1a3b",
+  storageBucket: "devirtude-d1a3b.firebasestorage.app",
+  messagingSenderId: "786023585384",
+  appId: "1:786023585384:web:23092392108b7f85db8ddd"
 };
 
 export const configurato = !String(firebaseConfig.apiKey).startsWith("INSERISCI");
