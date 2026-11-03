@@ -18,7 +18,6 @@ Nei file `privacy.html` e `cookie.html` cerca le scritte gialle `[…]` e sostit
 
 Checklist:
 - [ ] Dati del titolare compilati in `privacy.html`
-- [ ] Liberatorie firmate per foto/video di atleti (genitori per i minorenni)
 - [ ] Messaggi cancellati dopo 12 mesi (pulsante nel pannello → Messaggi)
 - [ ] Se un giorno aggiungi Google Analytics, Meta Pixel, video YouTube incorporati ecc. → serve banner cookie con consenso
 
