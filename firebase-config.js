@@ -14,3 +14,13 @@ export const firebaseConfig = {
 };
 
 export const configurato = !String(firebaseConfig.apiKey).startsWith("INSERISCI");
+
+// ============================================================
+//  FOTO: Cloudinary (gratis, senza carta)
+//  1. Registrati su https://cloudinary.com  2. Dashboard: copia il "Cloud name"
+//  3. Settings > Upload > Upload presets > Add: "Signing mode" = Unsigned, nome a piacere
+// ============================================================
+export const cloudinary = {
+  cloudName: "INSERISCI_CLOUD_NAME",
+  uploadPreset: "INSERISCI_UPLOAD_PRESET"
+};

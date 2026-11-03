@@ -419,8 +419,8 @@ async function caricaFoto(db, fs){
   const gal=document.getElementById('gal'); gal.replaceChildren();
   snap.docs.forEach(d=>{
     const f=d.data(); const a=document.createElement('a');
-    a.href=f.url;a.target='_blank';a.rel='noopener';
-    const img=new Image();img.alt='Foto Roma De Virtute';img.loading='lazy';img.src=f.url;
+    a.href='https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
+    const img=new Image();img.alt='Foto Roma De Virtute';img.loading='lazy';img.src=f.url.replace('/upload/','/upload/c_limit,w_1000,q_auto,f_auto/');
     a.appendChild(img);gal.appendChild(a);
   });
 }
