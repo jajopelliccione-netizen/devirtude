@@ -23,15 +23,17 @@ service cloud.firestore {
 
     // Messaggi: tutti possono INVIARE (con controlli), solo admin legge/gestisce
     match /messaggi/{id} {
-      allow create: if request.resource.data.keys().hasAll(['nome','email','messaggio','letto','creato'])
-        && request.resource.data.keys().hasOnly(['nome','email','telefono','messaggio','letto','creato'])
+      allow create: if request.resource.data.keys().hasAll(['nome','email','messaggio','consenso','letto','creato'])
+        && request.resource.data.keys().hasOnly(['nome','email','telefono','messaggio','consenso','letto','creato'])
         && request.resource.data.nome is string
         && request.resource.data.nome.size() > 0 && request.resource.data.nome.size() <= 100
         && request.resource.data.email is string
         && request.resource.data.email.size() > 3 && request.resource.data.email.size() <= 150
+        && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
         && request.resource.data.messaggio is string
         && request.resource.data.messaggio.size() > 0 && request.resource.data.messaggio.size() <= 2000
         && (!('telefono' in request.resource.data) || (request.resource.data.telefono is string && request.resource.data.telefono.size() <= 40))
+        && request.resource.data.consenso == true
         && request.resource.data.letto == false
         && request.resource.data.creato == request.time;
       allow read, update, delete: if isAdmin();

@@ -4,470 +4,164 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roma De Virtute | Pallanuoto</title>
-<meta name="description" content="Roma De Virtute – società di pallanuoto. Coraggio, forza e spirito di squadra.">
-<link rel="icon" href="assets/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-:root{--nero:#0d0d0d;--grafite:#1a1a1a;--arancio:#f25c05;--bianco:#fff;--grigio:#9a9a9a;--linea:#2c2c2c}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--nero);color:var(--bianco);line-height:1.6;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-.wrap{width:min(1200px,100% - 2.5rem);margin-inline:auto}
-.display{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.92;font-weight:400}
-.kicker{font-weight:700;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--arancio);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
-.kicker::before{content:"";width:40px;height:2px;background:var(--arancio)}
-h2.display{font-size:clamp(3rem,8vw,6.5rem)}
-section{padding:7rem 0}
-
-/* NAV */
-header{position:fixed;inset:0 0 auto;z-index:50;mix-blend-mode:normal}
-nav{display:flex;justify-content:space-between;align-items:center;height:78px}
-.brand img{width:52px;height:52px;transition:transform .4s}
-.brand:hover img{transform:rotate(-12deg) scale(1.08)}
-.menu{display:flex;gap:2rem;list-style:none;background:rgba(13,13,13,.75);backdrop-filter:blur(10px);padding:.7rem 1.6rem;border-radius:50px;border:1px solid var(--linea)}
-.menu a{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);transition:color .2s}
-.menu a:hover{color:var(--arancio)}
-.burger{display:none;background:var(--arancio);border:0;color:#fff;width:46px;height:46px;border-radius:50%;font-size:1.3rem;cursor:pointer}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse at 75% 40%,rgba(242,92,5,.28),transparent 60%),var(--nero)}
-.hero-logo{position:absolute;right:6%;top:105px;width:min(340px,28vw);border-radius:50%;
-  box-shadow:0 0 0 10px var(--nero),0 0 0 14px var(--arancio),0 40px 90px rgba(0,0,0,.6);animation:spin 40s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.hero-text{position:relative;padding:0 0 6rem}
-.hero h1{font-size:clamp(4.5rem,17vw,15rem)}
-.hero h1 .out{color:transparent;-webkit-text-stroke:2px #fff}
-.hero h1 .or{color:var(--arancio)}
-.hero-sub{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:2.2rem;border-top:1px solid var(--linea);padding-top:1.6rem}
-.hero-sub p{max-width:30rem;color:var(--grigio)}
-.btn{display:inline-flex;align-items:center;gap:.7rem;background:var(--arancio);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;padding:1.05rem 2rem;border-radius:50px;transition:.25s}
-.btn:hover{background:#fff;color:var(--nero);gap:1.2rem}
-.btn.line{background:none;border:2px solid #fff}
-.btn.line:hover{background:#fff}
-
-/* TICKER */
-.ticker{background:var(--arancio);overflow:hidden;white-space:nowrap;transform:rotate(-1.5deg);margin:0 -2rem;padding:1rem 0;position:relative;z-index:2}
-.ticker div{display:inline-block;animation:scroll 28s linear infinite;font-family:'Anton';font-size:1.8rem;text-transform:uppercase;letter-spacing:.06em}
-.ticker span{margin:0 1.6rem}
-.ticker i{font-style:normal;color:var(--nero)}
-@keyframes scroll{to{transform:translateX(-50%)}}
-
-/* CHI SIAMO */
-.about p.big{font-family:'Anton';font-size:clamp(1.9rem,4.6vw,3.6rem);text-transform:uppercase;line-height:1.08;max-width:60rem}
-.about p.big em{font-style:normal;color:var(--arancio)}
-.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3.5rem;color:var(--grigio);max-width:60rem}
-.numeri{display:grid;grid-template-columns:repeat(4,1fr);margin-top:5rem;border-top:1px solid var(--linea)}
-.numeri div{padding:2rem 1rem 0 0}
-.numeri b{font-family:'Anton';font-size:clamp(2.8rem,6vw,5rem);font-weight:400;display:block;line-height:1;color:var(--arancio)}
-.numeri span{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grigio)}
-
-
-/* PROMOZIONE */
-.promo-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center}
-.promo h2.display .out{color:transparent;-webkit-text-stroke:2px #fff}
-.promo h2.display .or{color:var(--arancio)}
-.promo p{color:var(--grigio);margin-top:1.6rem;max-width:34rem}
-.promo p b{color:#fff}
-.promo .btn{margin-top:2rem}
-.promo-foto{position:relative;display:block}
-.promo-foto video{display:block;width:100%;border-radius:18px;position:relative;z-index:1;transform:rotate(2deg);transition:transform .4s}
-.promo-foto::before{content:"";position:absolute;inset:0;border:3px solid var(--arancio);border-radius:18px;transform:rotate(-3deg) translate(-10px,10px)}
-.promo-foto:hover video{transform:rotate(0)}
-.promo-stamp{position:absolute;z-index:2;left:-14px;bottom:-18px;background:var(--arancio);font-family:'Anton';text-transform:uppercase;font-size:1.5rem;padding:.5rem 1.2rem;transform:rotate(-4deg);letter-spacing:.04em}
-
-
-/* INIZIA */
-.inizia{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
-.inizia-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
-.inizia-top p{color:var(--grigio);max-width:32rem}
-.inizia-top p b{color:#fff}
-.perche{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:22px;overflow:hidden}
-.perche div{background:var(--grafite);padding:2.2rem 2rem;transition:background .3s}
-.perche div:hover{background:#222}
-.perche h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.7rem;line-height:1.05;margin-bottom:.6rem}
-.perche h3 em{font-style:normal;color:var(--arancio);margin-right:.6rem}
-.perche p{color:var(--grigio);font-size:.95rem}
-.passi{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:4.5rem 0 3.5rem;counter-reset:p}
-.passi div{border-top:3px solid var(--arancio);padding-top:1.4rem;counter-increment:p}
-.passi div::before{content:"0" counter(p);font-family:'Anton';font-size:3.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--arancio);display:block;margin-bottom:.8rem}
-.passi h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.6rem;margin-bottom:.4rem}
-.passi p{color:var(--grigio);font-size:.95rem}
-
-/* VALORI - righe numerate */
-.valori{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
-.row{display:grid;grid-template-columns:90px 1fr 1.2fr;gap:2rem;align-items:baseline;padding:2rem 0;border-top:1px solid var(--linea);transition:.3s;position:relative}
-.row:last-child{border-bottom:1px solid var(--linea)}
-.row .n{font-family:'Anton';color:var(--arancio);font-size:1.4rem}
-.row h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(2rem,5vw,3.8rem);line-height:1;transition:.3s}
-.row p{color:var(--grigio)}
-.row:hover{padding-left:1.2rem}
-.row:hover h3{color:var(--arancio)}
-
-/* SQUADRE */
-.sq{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
-.sq-item{position:relative;border:2px solid var(--linea);border-radius:22px;padding:2.2rem 1.8rem 2rem;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:.3s}
-.sq-item::before{content:attr(data-n);position:absolute;top:-1.2rem;right:1rem;font-family:'Anton';font-size:9rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--linea);transition:.3s}
-.sq-item:hover{border-color:var(--arancio);transform:translateY(-6px)}
-.sq-item:hover::before{-webkit-text-stroke-color:var(--arancio)}
-.sq-item h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:2.4rem;line-height:1;margin-bottom:.6rem;position:relative}
-.sq-item p{color:var(--grigio);position:relative}
-
-/* GALLERIA */
-.gal-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem}
-.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:1rem}
-.gal a{position:relative;overflow:hidden;border-radius:18px;background:var(--grafite);display:block;aspect-ratio:6/5}
-.gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-.gal a:hover img{transform:scale(1.07)}
-.gal a::after{content:"Instagram ↗";position:absolute;inset:auto 0 0 0;padding:1.4rem 1rem .8rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(transparent,rgba(0,0,0,.85));opacity:0;transition:.3s}
-.gal a:hover::after{opacity:1}
-
-/* CALENDARIO */
-.cal{background:var(--arancio);color:var(--nero);clip-path:polygon(0 0,100% 4vw,100% 100%,0 calc(100% - 4vw));padding:11rem 0}
-.cal .kicker{color:var(--nero)}
-.cal .kicker::before{background:var(--nero)}
-.m{display:grid;grid-template-columns:130px 1fr auto;gap:2rem;align-items:center;padding:1.6rem 0;border-top:2px solid var(--nero)}
-.m:last-of-type{border-bottom:2px solid var(--nero)}
-.m .d{font-family:'Anton';font-size:2.6rem;line-height:1}
-.m h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.1}
-.m p{font-size:.9rem;font-weight:500;opacity:.75}
-.tag{background:var(--nero);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:50px}
-.cal .nota{margin-top:1.4rem;font-size:.85rem;font-weight:600}
-
-/* CONTATTI */
-.contatti .grande{display:block;font-family:'Anton';text-transform:uppercase;font-size:clamp(2.2rem,7.5vw,6.5rem);line-height:1;margin:1rem 0 3.5rem;word-break:break-word;transition:color .25s}
-.contatti .grande:hover{color:var(--arancio)}
-.info{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:1px solid var(--linea);padding-top:2rem}
-.info b{display:block;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--arancio);margin-bottom:.4rem}
-.info span{color:var(--grigio)}
-
-
-/* Form contatti + risultati */
-.m.fatta{opacity:.7}
-.m .ris{font-family:'Anton';font-size:1.5rem;background:var(--nero);color:#fff;padding:.2rem .9rem;border-radius:8px;white-space:nowrap}
-.cal h3.sub{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.6rem;margin:3rem 0 .5rem}
-.form{margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--linea);max-width:720px}
-.form h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:2.2rem;margin-bottom:1.4rem}
-.form .r{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.form input,.form textarea{width:100%;background:var(--grafite);border:2px solid var(--linea);color:#fff;border-radius:12px;padding:.95rem 1.1rem;font:inherit;transition:border-color .2s}
-.form input:focus,.form textarea:focus{outline:none;border-color:var(--arancio)}
-.form textarea{min-height:140px;resize:vertical;margin-bottom:1rem}
-.form button{border:0;cursor:pointer;font-family:inherit}
-.form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.form .esito{margin-top:1rem;font-weight:600}
-.form .esito.ok{color:#3ecf6e}.form .esito.err{color:#ff7a6e}
-
-/* FOOTER */
-footer{border-top:1px solid var(--linea);padding:2.5rem 0;color:var(--grigio);font-size:.85rem}
-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-footer img{width:46px}
-
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
-.reveal.in{opacity:1;transform:none}
-
-@media(max-width:860px){
-  section{padding:4.5rem 0}
-  .burger{display:block}
-  .menu{display:none;position:absolute;top:78px;right:1.25rem;flex-direction:column;border-radius:20px;gap:1rem;padding:1.4rem 1.8rem}
-  .menu.open{display:flex}
-  .hero-logo{width:56vw;right:50%;transform:translate(50%,0);top:100px;animation:none}
-  .hero-text{padding-bottom:3.5rem}
-  .hero h1{font-size:clamp(4rem,21vw,8rem)}
-  .about .cols,.sq,.info{grid-template-columns:1fr}
-  .numeri{grid-template-columns:1fr 1fr}
-  .row{grid-template-columns:50px 1fr;gap:.6rem 1rem}
-  .row p{grid-column:2}
-  .valori,.cal{padding:8rem 0}
-  .promo-grid,.inizia-top,.perche,.passi{grid-template-columns:1fr;gap:2rem}
-  .inizia{padding:8rem 0}
-  .form .r{grid-template-columns:1fr}
-  .m{grid-template-columns:80px 1fr;gap:.8rem 1rem}
-  .m .d{font-size:1.9rem}
-  .m .tag,.m .ris{grid-column:2;justify-self:start}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+<meta name="description" content="Roma De Virtute – società di pallanuoto a Roma. Serie B, Serie D e settore giovanile. Vieni a provare!">
+<meta name="theme-color" content="#0d0d0d">
+<meta property="og:title" content="Roma De Virtute | Pallanuoto">
+<meta property="og:description" content="Coraggio, grinta e spirito di squadra. Società di pallanuoto a Roma.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo-96.png" type="image/png">
+<link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
 <header>
   <nav class="wrap">
-    <a href="#home" class="brand"><img src="assets/logo.png" alt="Roma De Virtute"></a>
-    <button class="burger" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">≡</button>
+    <a href="#home" class="brand" aria-label="Roma De Virtute - inizio pagina"><img src="assets/logo-96.png" width="48" height="48" alt=""></a>
+    <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">≡</button>
     <ul class="menu" id="menu">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#squadre">Squadre</a></li>
-      <li><a href="#inizia">Inizia</a></li>
-      <li><a href="#foto">Foto</a></li>
       <li><a href="#calendario">Calendario</a></li>
-      <li><a href="#contatti">Contatti</a></li>
+      <li><a href="#foto">Foto</a></li>
+      <li><a href="#entra" class="cta">Entra nel branco</a></li>
     </ul>
   </nav>
 </header>
 
+<main>
+
 <section class="hero" id="home">
-  <img class="hero-logo" src="assets/logo.png" alt="Logo Roma De Virtute con tigre e pallone">
-  <div class="wrap hero-text">
+  <img class="hero-logo" src="assets/logo.webp" width="480" height="480" alt="Logo Roma De Virtute con tigre e pallone" fetchpriority="high">
+  <div class="wrap">
     <h1 class="display"><span class="out">Roma</span><br><span class="or">De Virtute</span></h1>
     <div class="hero-sub">
-      <p>Società di pallanuoto. Coraggio, grinta e spirito di squadra: quando la tigre entra in acqua, non molla mai.</p>
-      <a href="#contatti" class="btn">Unisciti al branco <span>→</span></a>
+      <p>Società di pallanuoto a Roma. Coraggio, grinta e spirito di squadra: quando la tigre entra in acqua, non molla mai.</p>
+      <a href="#entra" class="btn">Vieni a provare <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-<div style="overflow:hidden;padding:1.5rem 0"><div class="ticker" aria-hidden="true">
-  <div>
-    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
-    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
-    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
-    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
-  </div>
-</div></div>
-
-<section class="about" id="chi-siamo">
+<section id="chi-siamo">
   <div class="wrap">
-    <div class="kicker reveal">Chi siamo</div>
-    <p class="big reveal">Non siamo solo una squadra. Siamo un branco che nuota, lotta e <em>vince insieme</em>, dalla prima bracciata al fischio finale.</p>
-    <div class="cols reveal">
-      <p><b style="color:#fff">Roma De Virtute</b> nasce dalla passione per la pallanuoto e dalla voglia di crescere insieme, dentro e fuori dalla vasca.</p>
-      <p>"De Virtute", per virtù: impegno, rispetto e sacrificio. La tigre sul nostro stemma è il nostro simbolo, forza e determinazione in ogni azione.</p>
-    </div>
-    <div class="numeri reveal">
-      <div><b>7</b><span>Giocatori in acqua</span></div>
-      <div><b>4×8'</b><span>Tempi di gioco</span></div>
-      <div><b>100%</b><span>Grinta</span></div>
-      <div><b>1</b><span>Grande famiglia</span></div>
+    <div class="kicker">Chi siamo</div>
+    <p class="big">Non siamo solo una squadra. Siamo un branco che nuota, lotta e <em>vince insieme</em>.</p>
+    <p class="about-txt muted"><strong class="bianco">Roma De Virtute</strong> nasce dalla passione per la pallanuoto e dalla voglia di crescere insieme, dentro e fuori dalla vasca. "De Virtute", per virtù: impegno, rispetto e sacrificio. La tigre sul nostro stemma è il nostro simbolo.</p>
+    <div class="valori">
+      <div><h3>Coraggio</h3><p>Ogni sfida a testa alta, in vasca e nella vita.</p></div>
+      <div><h3>Squadra</h3><p>Il gruppo viene prima del singolo.</p></div>
+      <div><h3>Sacrificio</h3><p>Allenamento e disciplina fanno i risultati.</p></div>
+      <div><h3>Passione</h3><p>Lo sport più duro che ci sia, per questo lo amiamo.</p></div>
     </div>
   </div>
 </section>
 
-<section class="promo" id="promozione">
+<section class="alt promo" id="promozione">
   <div class="wrap promo-grid">
     <div>
-      <div class="kicker reveal">Stagione scorsa</div>
-      <h2 class="display reveal"><span class="out">Promossi</span><br><span class="or">in Serie B</span></h2>
-      <p class="reveal"><b>L'abbiamo fatto.</b> Dopo una stagione di sacrificio, allenamenti e tanta fame, Roma De Virtute ha conquistato la promozione in Serie B. Una vittoria di tutto il branco: giocatori, staff, famiglie e tifosi.</p>
-      <p class="reveal">E adesso si riparte, più forti, con una categoria in più da ruggire.</p>
-      <a class="btn reveal" href="https://www.instagram.com/p/DZ2QYAVCLNv/" target="_blank" rel="noopener">Vedi il post su Instagram <span>↗</span></a>
+      <div class="kicker">Stagione scorsa</div>
+      <h2 class="display"><span class="out">Promossi</span><br><span class="or">in Serie B</span></h2>
+      <p><b>L'abbiamo fatto.</b> Dopo una stagione di sacrificio, allenamenti e tanta fame, Roma De Virtute ha conquistato la promozione in Serie B. Una vittoria di tutto il branco: giocatori, staff, famiglie e tifosi.</p>
+      <p>E adesso si riparte, più forti, con una categoria in più da ruggire.</p>
+      <a class="btn line" href="https://www.instagram.com/p/DZ2QYAVCLNv/" target="_blank" rel="noopener noreferrer">Vedi il post su Instagram <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="promo-foto reveal">
-      <video src="assets/promozione.mp4" poster="assets/instagram/foto-1.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
-      <span class="promo-stamp">Serie B</span>
+    <div class="promo-foto">
+      <video id="video" data-src="assets/promozione.mp4" poster="assets/poster.webp" width="872" height="718" muted loop playsinline controls preload="none" aria-label="Festeggiamenti per la promozione in Serie B"></video>
+      <span class="stamp">Serie B</span>
     </div>
-  </div>
-</section>
-
-<section class="valori">
-  <div class="wrap">
-    <div class="kicker reveal">I nostri valori</div>
-    <h2 class="display reveal" style="margin-bottom:3rem">Lo spirito<br>della tigre</h2>
-    <div class="row reveal"><span class="n">01</span><h3>Coraggio</h3><p>Affrontiamo ogni sfida a testa alta, in vasca e nella vita.</p></div>
-    <div class="row reveal"><span class="n">02</span><h3>Squadra</h3><p>Si vince e si perde insieme. Il gruppo viene prima del singolo.</p></div>
-    <div class="row reveal"><span class="n">03</span><h3>Sacrificio</h3><p>Allenamento, costanza e disciplina: la base di ogni risultato.</p></div>
-    <div class="row reveal"><span class="n">04</span><h3>Passione</h3><p>La pallanuoto è lo sport più duro che ci sia, e per questo lo amiamo.</p></div>
   </div>
 </section>
 
 <section id="squadre">
   <div class="wrap">
-    <div class="kicker reveal">Le categorie</div>
-    <h2 class="display reveal">Le nostre<br>squadre</h2>
+    <div class="kicker">Le categorie</div>
+    <h2 class="display">Le nostre squadre</h2>
     <div class="sq">
-      <div class="sq-item reveal" data-n="01"><h3>Serie B</h3><p>La nostra squadra di punta, appena promossa e pronta a ruggire in Serie B.</p></div>
-      <div class="sq-item reveal" data-n="02"><h3>Serie D</h3><p>Il gruppo che lotta ogni settimana in campionato, con grinta e spirito di squadra.</p></div>
-      <div class="sq-item reveal" data-n="03"><h3>Cadetti</h3><p>Giovani atleti che crescono tra allenamenti, partite e sacrifici.</p></div>
-      <div class="sq-item reveal" data-n="04"><h3>Juniores</h3><p>Il ponte verso la prima squadra: talento, grinta e tanta voglia di emergere.</p></div>
-      <div class="sq-item reveal" data-n="05"><h3>Allievi</h3><p>Si impara il mestiere della pallanuoto e si costruisce il carattere.</p></div>
-      <div class="sq-item reveal" data-n="06"><h3>Ragazzi</h3><p>Il primo passo in vasca: tecnica, divertimento e spirito di squadra.</p></div>
+      <div><h3>Serie B</h3><p>La squadra di punta, appena promossa e pronta a ruggire.</p></div>
+      <div><h3>Serie D</h3><p>Il gruppo che lotta ogni settimana in campionato.</p></div>
+      <div><h3>Cadetti</h3><p>Giovani atleti che crescono tra allenamenti e partite.</p></div>
+      <div><h3>Juniores</h3><p>Il ponte verso la prima squadra.</p></div>
+      <div><h3>Allievi</h3><p>Si impara il mestiere e si costruisce il carattere.</p></div>
+      <div><h3>Ragazzi</h3><p>Il primo passo in vasca: tecnica e divertimento.</p></div>
     </div>
-  </div>
-</section>
-
-<section class="inizia" id="inizia">
-  <div class="wrap">
-    <div class="inizia-top">
-      <div>
-        <div class="kicker reveal">Provaci</div>
-        <h2 class="display reveal">Vuoi iniziare a giocare a <span style="color:var(--arancio)">pallanuoto?</span></h2>
-      </div>
-      <p class="reveal"><b>Non serve essere già dei campioni.</b> Basta saper nuotare e avere voglia di mettersi in gioco. Alla pallanuoto si impara da zero, un allenamento alla volta, insieme a un gruppo che ti fa sentire subito a casa.</p>
-    </div>
-    <div class="perche reveal">
-      <div><h3><em>01</em>Sport completo</h3><p>Nuoto, forza, resistenza e coordinazione: in acqua lavora tutto il corpo e ti senti più in forma dopo poche settimane.</p></div>
-      <div><h3><em>02</em>Si gioca in squadra</h3><p>Sette giocatori, un solo obiettivo. Impari a fidarti dei compagni e a vincere (e perdere) insieme.</p></div>
-      <div><h3><em>03</em>Testa e grinta</h3><p>Ogni azione richiede lucidità, coraggio e decisioni veloci. Una scuola di carattere che ti serve anche fuori dalla vasca.</p></div>
-      <div><h3><em>04</em>Un gruppo vero</h3><p>Allenamenti, partite, terzi tempi e festeggiamenti: la squadra diventa una seconda famiglia.</p></div>
-    </div>
-    <div class="passi">
-      <div class="reveal"><h3>Scrivici</h3><p>Scrivici su Instagram o chiama il direttore sportivo e dicci la tua età e se hai già giocato.</p></div>
-      <div class="reveal"><h3>Vieni a provare</h3><p>Ti aspettiamo in piscina per un allenamento di prova, con costume, cuffia e tanta voglia.</p></div>
-      <div class="reveal"><h3>Entra nel branco</h3><p>Se ti piace, ti inseriamo nella squadra giusta per la tua età e il tuo livello.</p></div>
-    </div>
-    <a class="btn reveal" href="#contatti">Contattaci <span>→</span></a>
-  </div>
-</section>
-
-<section id="foto" style="padding-top:2rem">
-  <div class="wrap">
-    <div class="gal-head reveal">
-      <div>
-        <div class="kicker">Dal nostro Instagram</div>
-        <h2 class="display">Il branco<br>in azione</h2>
-      </div>
-      <a class="btn line" href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">Seguici su Instagram <span>↗</span></a>
-    </div>
-    <!-- Metti le foto in assets/instagram/ chiamandole foto-1.jpg ... foto-6.jpg -->
-    <div class="gal reveal" id="gal"></div>
   </div>
 </section>
 
 <section class="cal" id="calendario">
   <div class="wrap">
-    <div class="kicker reveal">In vasca</div>
-    <h2 class="display reveal" style="margin-bottom:3rem">Calendario</h2>
+    <div class="kicker">In vasca</div>
+    <h2 class="display">Calendario</h2>
     <div id="partite"></div>
     <p class="nota" id="notaPartite">Le date delle prossime partite verranno pubblicate a breve.</p>
   </div>
 </section>
 
-<section class="contatti" id="contatti">
+<section id="foto">
   <div class="wrap">
-    <div class="kicker reveal">Contatti</div>
-    <h2 class="display reveal">Vuoi giocare<br>con noi?</h2>
-    <a class="grande reveal" href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">@devirtuteroma ↗</a>
-    <div class="info reveal">
-      <div><b>Dove ci alleniamo</b><a href="https://www.google.com/maps/search/?api=1&query=Sporting+Village+The+Monster+Via+Polia+44-46+Roma" target="_blank" rel="noopener"><span>Sporting Village The Monster<br>Via Polia 44-46, Roma</span></a></div>
-      <div><b>Direttore sportivo</b><a href="tel:+393479292955"><span>Adriano Caresta<br>347 929 2955</span></a></div>
-      <div><b>Social</b><span><a href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">Instagram @devirtuteroma</a><br><a href="https://www.youtube.com/@devirtuteroma" target="_blank" rel="noopener">YouTube @devirtuteroma</a></span></div>
+    <div class="gal-head">
+      <div>
+        <div class="kicker">Dal nostro Instagram</div>
+        <h2 class="display">Il branco in azione</h2>
+      </div>
+      <a class="btn line" href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener noreferrer">Seguici su Instagram <span aria-hidden="true">↗</span></a>
     </div>
-
-    <form class="form reveal" id="formMsg" novalidate>
-      <h3>Scrivici un messaggio</h3>
-      <div class="r"><input name="nome" type="text" placeholder="Nome e cognome" maxlength="100" required><input name="email" type="email" placeholder="Email" maxlength="150" required></div>
-      <div class="r"><input name="telefono" type="tel" placeholder="Telefono (facoltativo)" maxlength="40"><input name="web" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
-      <textarea name="messaggio" placeholder="Il tuo messaggio: età, se hai già giocato, cosa vuoi sapere…" maxlength="2000" required></textarea>
-      <button class="btn" type="submit">Invia messaggio <span>→</span></button>
-      <p class="esito" id="esitoMsg" role="status"></p>
-    </form>
+    <div class="gal" id="gal"></div>
   </div>
 </section>
 
+<section class="alt" id="entra">
+  <div class="wrap">
+    <div class="entra-top">
+      <div>
+        <div class="kicker">Vuoi iniziare?</div>
+        <h2 class="display">Vuoi giocare a pallanuoto con noi?</h2>
+      </div>
+      <p class="muted"><strong class="bianco">Non serve essere già dei campioni.</strong> Basta saper nuotare e avere voglia di mettersi in gioco: alla pallanuoto si impara da zero, un allenamento alla volta, in un gruppo che ti fa sentire subito a casa.</p>
+    </div>
+
+    <div class="passi">
+      <div><h3>Scrivici</h3><p>Mandaci un messaggio o chiama il direttore sportivo: dicci l'età e se hai già giocato.</p></div>
+      <div><h3>Vieni a provare</h3><p>Ti aspettiamo in piscina per un allenamento di prova.</p></div>
+      <div><h3>Entra nel branco</h3><p>Ti inseriamo nella squadra giusta per età e livello.</p></div>
+    </div>
+
+    <div class="entra-grid" id="contatti">
+      <div class="info">
+        <div><b>Dove ci alleniamo</b><a href="https://www.google.com/maps/search/?api=1&amp;query=Sporting+Village+The+Monster+Via+Polia+44-46+Roma" target="_blank" rel="noopener noreferrer">Sporting Village The Monster<br>Via Polia 44-46, Roma</a></div>
+        <div><b>Direttore sportivo</b><a href="tel:+393479292955">Adriano Caresta<br>347 929 2955</a></div>
+        <div><b>Social</b><a href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener noreferrer">Instagram @devirtuteroma</a><br><a href="https://www.youtube.com/@devirtuteroma" target="_blank" rel="noopener noreferrer">YouTube @devirtuteroma</a></div>
+      </div>
+
+      <form class="form" id="formMsg" novalidate>
+        <h3>Scrivici un messaggio</h3>
+        <div class="r">
+          <input name="nome" type="text" placeholder="Nome e cognome" maxlength="100" autocomplete="name" aria-label="Nome e cognome" required>
+          <input name="email" type="email" placeholder="Email" maxlength="150" autocomplete="email" aria-label="Email" required>
+        </div>
+        <div class="r">
+          <input name="telefono" type="tel" placeholder="Telefono (facoltativo)" maxlength="40" autocomplete="tel" aria-label="Telefono (facoltativo)">
+          <input name="web" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        </div>
+        <textarea name="messaggio" placeholder="Età, se hai già giocato, cosa vuoi sapere…" maxlength="2000" aria-label="Messaggio" required></textarea>
+        <label class="consenso"><input type="checkbox" name="consenso" required><span>Ho letto l'<a href="privacy.html" target="_blank">informativa privacy</a> e accetto che i miei dati siano usati per rispondere alla mia richiesta. Se hai meno di 14 anni, fai compilare il modulo a un genitore.</span></label>
+        <button class="btn" type="submit">Invia messaggio <span aria-hidden="true">→</span></button>
+        <p class="esito" id="esitoMsg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <footer>
   <div class="wrap">
-    <img src="assets/logo.png" alt="Roma De Virtute">
-    <span>© <span id="anno"></span> Roma De Virtute · Società di Pallanuoto</span>
+    <img src="assets/logo-96.png" width="44" height="44" alt="" loading="lazy">
+    <span>© <span id="anno">2026</span> Roma De Virtute · Società di pallanuoto</span>
+    <nav aria-label="Note legali"><a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a></nav>
   </div>
 </footer>
 
-<script type="module">
-import { firebaseConfig, configurato } from './firebase-config.js';
-
-const io2 = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}}),{threshold:.1});
-const reveal = el => { el.classList.add('reveal'); io2.observe(el); };
-
-/* ---- Galleria di riserva (foto statiche in assets/instagram) ---- */
-function galleriaStatica(){
-  const gal=document.getElementById('gal'); gal.replaceChildren();
-  for(let i=1;i<=8;i++){
-    const a=document.createElement('a');
-    a.href=i<=2?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
-    const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
-    img.onerror=()=>a.remove();
-    a.appendChild(img);gal.appendChild(a);
-  }
-}
-galleriaStatica();
-
-/* ---- Partite ---- */
-function rigaPartita(p, fatta){
-  const [y,m,d]=p.data.split('-');
-  const casa=p.tipo==='casa';
-  const m1=document.createElement('div'); m1.className='m reveal in'+(fatta?' fatta':'');
-  const dd=document.createElement('span'); dd.className='d'; dd.textContent=d+' / '+m;
-  const c=document.createElement('div');
-  const h=document.createElement('h3'); h.textContent=casa?'Roma De Virtute vs '+p.avversario:p.avversario+' vs Roma De Virtute';
-  const pp=document.createElement('p'); pp.textContent=[p.squadra,p.ora?'ore '+p.ora:'',p.luogo].filter(Boolean).join(' · ');
-  c.append(h,pp);
-  const t=document.createElement('span');
-  if(fatta&&p.risultato){t.className='ris';t.textContent=p.risultato}else{t.className='tag';t.textContent=casa?'Casa':'Trasferta'}
-  m1.append(dd,c,t); return m1;
-}
-async function caricaPartite(db, fs){
-  const snap=await fs.getDocs(fs.query(fs.collection(db,'partite'),fs.orderBy('data','asc')));
-  const tutte=snap.docs.map(d=>d.data());
-  const oggi=new Date().toISOString().slice(0,10);
-  const prossime=tutte.filter(p=>p.data>=oggi).slice(0,6);
-  const passate=tutte.filter(p=>p.data<oggi&&p.risultato).reverse().slice(0,4);
-  const box=document.getElementById('partite'); box.replaceChildren();
-  prossime.forEach(p=>box.append(rigaPartita(p,false)));
-  if(passate.length){
-    const h=document.createElement('h3');h.className='sub';h.textContent='Ultimi risultati';box.append(h);
-    passate.forEach(p=>box.append(rigaPartita(p,true)));
-  }
-  document.getElementById('notaPartite').style.display=prossime.length?'none':'';
-}
-
-/* ---- Foto ---- */
-async function caricaFoto(db, fs){
-  const snap=await fs.getDocs(fs.query(fs.collection(db,'foto'),fs.orderBy('creato','desc'),fs.limit(12)));
-  if(snap.empty) return;
-  const gal=document.getElementById('gal'); gal.replaceChildren();
-  snap.docs.forEach(d=>{
-    const f=d.data(); const a=document.createElement('a');
-    a.href='https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
-    const img=new Image();img.alt='Foto Roma De Virtute';img.loading='lazy';img.src=f.url.replace('/upload/','/upload/c_limit,w_1000,q_auto,f_auto/');
-    a.appendChild(img);gal.appendChild(a);
-  });
-}
-
-/* ---- Messaggi ---- */
-function formMessaggi(getDb, fs){
-  const form=document.getElementById('formMsg'), esito=document.getElementById('esitoMsg');
-  form.addEventListener('submit', async e=>{
-    e.preventDefault();
-    const f=new FormData(form);
-    esito.className='esito';
-    if(f.get('web')) return;                       // anti-spam (campo nascosto)
-    const nome=f.get('nome').trim(), email=f.get('email').trim(), tel=f.get('telefono').trim(), msg=f.get('messaggio').trim();
-    if(!nome||!/^\S+@\S+\.\S+$/.test(email)||!msg){esito.classList.add('err');esito.textContent='Compila nome, email valida e messaggio.';return}
-    const db=getDb();
-    if(!db){esito.classList.add('err');esito.textContent='Invio non disponibile al momento: scrivici su Instagram o chiamaci.';return}
-    const btn=form.querySelector('button'); btn.disabled=true;
-    try{
-      const dati={nome,email,messaggio:msg,letto:false,creato:fs.serverTimestamp()};
-      if(tel) dati.telefono=tel;
-      await fs.addDoc(fs.collection(db,'messaggi'),dati);
-      form.reset();esito.classList.add('ok');esito.textContent='Messaggio inviato! Ti risponderemo presto. 🐯';
-    }catch(err){esito.classList.add('err');esito.textContent='Errore nell\'invio. Riprova o scrivici su Instagram.'}
-    btn.disabled=false;
-  });
-}
-
-/* ---- Avvio Firebase (solo se configurato) ---- */
-let db=null, fs=null;
-if(configurato){
-  try{
-    const [{initializeApp}, firestore]=await Promise.all([
-      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
-      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js')]);
-    fs=firestore; db=fs.getFirestore(initializeApp(firebaseConfig));
-    caricaPartite(db,fs).catch(console.warn);
-    caricaFoto(db,fs).catch(console.warn);
-  }catch(e){console.warn('Firebase non disponibile',e)}
-}
-formMessaggi(()=>db, fs);
-</script>
-<script>
-document.getElementById('anno').textContent=new Date().getFullYear();
-document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
-
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
+<script type="module" src="js/site.js"></script>
 </body>
 </html>

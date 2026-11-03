@@ -1,49 +1,41 @@
 # Roma De Virtute – sito + pannello admin
 
-Sito statico (HTML) con **Firebase** (database, login, foto) e hosting su **Cloudflare Pages**.
+Sito statico (HTML/CSS/JS, nessuna build) con **Firebase** (database + login) e **Cloudinary** (foto), ospitato su **Cloudflare Pages**.
 
 ```
-index.html          sito pubblico
-admin/index.html    pannello admin (partite, foto, messaggi)
-firebase-config.js  dati del tuo progetto Firebase  <-- DA COMPILARE
-firestore.rules     regole di sicurezza database    <-- DA COMPILARE (email admin)
-assets/             logo e foto di riserva
+index.html              sito pubblico
+privacy.html cookie.html  informative (DA COMPLETARE con i dati legali, vedi sotto)
+css/ js/ fonts/ assets/   stile, script, font (self-hosted), immagini ottimizzate
+admin/                  pannello admin (partite, foto, messaggi)
+firebase-config.js      dati progetto Firebase + Cloudinary
+firestore.rules         regole di sicurezza del database
+_headers                header di sicurezza (CSP, HSTS…) e cache per Cloudflare
 ```
 
-## 1. Crea il progetto Firebase
-1. Vai su https://console.firebase.google.com → **Aggiungi progetto**.
-2. **Build → Authentication → Inizia → Email/Password → Abilita.**
-3. Sempre in Authentication → **Utenti → Aggiungi utente**: inserisci l'email e la password con cui entrerai nel pannello.
-4. **Build → Firestore Database → Crea database** (modalità produzione, regione `eur3`/`europe-west`).
-5. *(Le foto NON usano Firebase Storage: usano Cloudinary, vedi sotto.)*
-6. **Impostazioni progetto (ingranaggio) → Le tue app → `</>` Web** → registra l'app e copia la `firebaseConfig`.
+## Da completare (legale)
+Nei file `privacy.html` e `cookie.html` cerca le scritte gialle `[…]` e sostituiscile con i dati reali della società
+(denominazione, sede legale, C.F./P.IVA, email o PEC per la privacy). Fai rileggere le informative a un consulente/legale.
 
-## 2. Compila i file
-- Incolla i valori in `firebase-config.js`.
-- In `firestore.rules` sostituisci `SOSTITUISCI_CON_EMAIL_ADMIN@esempio.it` con la **stessa email** dell'utente creato al punto 1.3 (puoi mettere più email separate da virgola).
-- Pubblica le regole: nella console copia/incolla `firestore.rules` in *Firestore → Regole* e premi **Pubblica**.
+Checklist:
+- [ ] Dati del titolare compilati in `privacy.html`
+- [ ] Liberatorie firmate per foto/video di atleti (genitori per i minorenni)
+- [ ] Messaggi cancellati dopo 12 mesi (pulsante nel pannello → Messaggi)
+- [ ] Se un giorno aggiungi Google Analytics, Meta Pixel, video YouTube incorporati ecc. → serve banner cookie con consenso
 
-## 2b. Foto con Cloudinary (gratis, senza carta)
-1. Registrati su https://cloudinary.com (piano Free).
-2. Dalla Dashboard copia il **Cloud name**.
-3. **Settings → Upload → Upload presets → Add upload preset**: *Signing mode* = **Unsigned**, salva e copia il nome del preset.
-4. Incolla cloud name e nome preset in `firebase-config.js` (sezione `cloudinary`).
-Nota: eliminando una foto dal pannello sparisce dal sito; il file resta nel tuo spazio Cloudinary (puoi cancellarlo da lì).
+## Sicurezza (già fatto)
+- Header: CSP restrittiva (niente script inline), HSTS, anti-clickjacking, nosniff, Permissions-Policy.
+- Database: tutti leggono partite/foto; i messaggi possono solo essere **creati** (campi validati, consenso obbligatorio);
+  solo l'email admin può scrivere o leggere i messaggi. Registrazione di nuovi utenti Firebase disabilitata.
+- Nessun HTML dai dati del database viene interpretato (solo `textContent`); gli URL foto sono accettati solo da `res.cloudinary.com`.
+- Uscita automatica dal pannello dopo 30 minuti di inattività.
 
-## 3. Pubblica su Cloudflare Pages
-1. Carica questa cartella su GitHub (già fatto) → https://dash.cloudflare.com → **Workers & Pages → Create → Pages → Connect to Git**.
-2. Scegli il repository e il branch. **Build command:** vuoto. **Output directory:** `/` (la radice).
-3. Deploy. Ogni push aggiorna il sito.
-4. In Firebase → Authentication → **Impostazioni → Domini autorizzati** aggiungi il dominio di Cloudflare (`xxx.pages.dev` e il tuo dominio personalizzato).
-5. (Consigliato) in Cloudflare Zero Trust puoi proteggere anche `/admin/*` con Access come secondo livello di sicurezza.
+Consigliato in più (manuale):
+1. **Cloudflare Access** davanti a `/admin/*` (Zero Trust → Access → Applications, gratis fino a 50 utenti): secondo lucchetto.
+2. **Restrizione chiave API**: console.cloud.google.com → API e servizi → Credenziali → chiave "Browser key" → Restrizioni per referrer HTTP: `https://devirtude.pages.dev/*` (e il tuo dominio).
+3. **Cloudinary**: Settings → Upload → preset `devirtude` → limita formati (jpg, png, webp) e dimensione massima file.
+4. **Firebase App Check** (reCAPTCHA) per bloccare bot sul modulo messaggi.
+5. Password admin lunga e unica; mai condividere chiavi/token in chat; ruota quelli già condivisi.
 
-## Come si usa il pannello
-Vai su `https://IL-TUO-SITO/admin/` ed entra con email e password.
-- **Partite**: aggiungi, modifica, elimina. Appaiono nel *Calendario* del sito; con il risultato finiscono in "Ultimi risultati".
-- **Foto**: carica una o più foto (vengono ridimensionate); compaiono nella galleria. Se non ce ne sono, il sito mostra quelle in `assets/instagram/`.
-- **Messaggi**: ricevi quelli inviati dal modulo "Scrivici un messaggio"; puoi rispondere, segnarli come letti o eliminarli.
-
-## Sicurezza
-- Chiunque può **leggere** partite e foto e **inviare** messaggi (con limiti di lunghezza e campo anti‑spam).
-- Solo l'email admin può scrivere/eliminare e leggere i messaggi: le regole sono applicate dai server Firebase, non dal sito.
-- La `firebaseConfig` non è un segreto.
+## Aggiornare il sito
+Ogni push sul branch di produzione di Cloudflare Pages ripubblica il sito.
+Partite, foto e messaggi si gestiscono da `/admin/` (non serve toccare il codice).
