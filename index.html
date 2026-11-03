@@ -80,6 +80,24 @@ nav{display:flex;justify-content:space-between;align-items:center;height:78px}
 .promo-foto:hover video{transform:rotate(0)}
 .promo-stamp{position:absolute;z-index:2;left:-14px;bottom:-18px;background:var(--arancio);font-family:'Anton';text-transform:uppercase;font-size:1.5rem;padding:.5rem 1.2rem;transform:rotate(-4deg);letter-spacing:.04em}
 
+
+/* INIZIA */
+.inizia{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
+.inizia-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.inizia-top p{color:var(--grigio);max-width:32rem}
+.inizia-top p b{color:#fff}
+.perche{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:22px;overflow:hidden}
+.perche div{background:var(--grafite);padding:2.2rem 2rem;transition:background .3s}
+.perche div:hover{background:#222}
+.perche h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.7rem;line-height:1.05;margin-bottom:.6rem}
+.perche h3 em{font-style:normal;color:var(--arancio);margin-right:.6rem}
+.perche p{color:var(--grigio);font-size:.95rem}
+.passi{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:4.5rem 0 3.5rem;counter-reset:p}
+.passi div{border-top:3px solid var(--arancio);padding-top:1.4rem;counter-increment:p}
+.passi div::before{content:"0" counter(p);font-family:'Anton';font-size:3.5rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--arancio);display:block;margin-bottom:.8rem}
+.passi h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.6rem;margin-bottom:.4rem}
+.passi p{color:var(--grigio);font-size:.95rem}
+
 /* VALORI - righe numerate */
 .valori{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
 .row{display:grid;grid-template-columns:90px 1fr 1.2fr;gap:2rem;align-items:baseline;padding:2rem 0;border-top:1px solid var(--linea);transition:.3s;position:relative}
@@ -148,7 +166,8 @@ footer img{width:46px}
   .row{grid-template-columns:50px 1fr;gap:.6rem 1rem}
   .row p{grid-column:2}
   .valori,.cal{padding:8rem 0}
-  .promo-grid{grid-template-columns:1fr;gap:3rem}
+  .promo-grid,.inizia-top,.perche,.passi{grid-template-columns:1fr;gap:2rem}
+  .inizia{padding:8rem 0}
   .m{grid-template-columns:80px 1fr;gap:.8rem 1rem}
   .m .d{font-size:1.9rem}
   .m .tag{grid-column:2;justify-self:start}
@@ -165,6 +184,7 @@ footer img{width:46px}
     <ul class="menu" id="menu">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#squadre">Squadre</a></li>
+      <li><a href="#inizia">Inizia</a></li>
       <li><a href="#foto">Foto</a></li>
       <li><a href="#calendario">Calendario</a></li>
       <li><a href="#contatti">Contatti</a></li>
@@ -245,6 +265,30 @@ footer img{width:46px}
       <div class="sq-item reveal" data-n="02"><h3>Prima squadra</h3><p>Il gruppo dei grandi, pronto a dare battaglia in ogni campionato.</p></div>
       <div class="sq-item reveal" data-n="03"><h3>Amatori</h3><p>Per chi ama la pallanuoto a ogni età, con spirito sportivo e tanto divertimento.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="inizia" id="inizia">
+  <div class="wrap">
+    <div class="inizia-top">
+      <div>
+        <div class="kicker reveal">Provaci</div>
+        <h2 class="display reveal">Vuoi iniziare a giocare a <span style="color:var(--arancio)">pallanuoto?</span></h2>
+      </div>
+      <p class="reveal"><b>Non serve essere già dei campioni.</b> Basta saper nuotare e avere voglia di mettersi in gioco. Alla pallanuoto si impara da zero, un allenamento alla volta, insieme a un gruppo che ti fa sentire subito a casa.</p>
+    </div>
+    <div class="perche reveal">
+      <div><h3><em>01</em>Sport completo</h3><p>Nuoto, forza, resistenza e coordinazione: in acqua lavora tutto il corpo e ti senti più in forma dopo poche settimane.</p></div>
+      <div><h3><em>02</em>Si gioca in squadra</h3><p>Sette giocatori, un solo obiettivo. Impari a fidarti dei compagni e a vincere (e perdere) insieme.</p></div>
+      <div><h3><em>03</em>Testa e grinta</h3><p>Ogni azione richiede lucidità, coraggio e decisioni veloci. Una scuola di carattere che ti serve anche fuori dalla vasca.</p></div>
+      <div><h3><em>04</em>Un gruppo vero</h3><p>Allenamenti, partite, terzi tempi e festeggiamenti: la squadra diventa una seconda famiglia.</p></div>
+    </div>
+    <div class="passi">
+      <div class="reveal"><h3>Scrivici</h3><p>Contattaci con il modulo o su Instagram e dicci la tua età e se hai già giocato.</p></div>
+      <div class="reveal"><h3>Vieni a provare</h3><p>Ti aspettiamo in piscina per un allenamento di prova, con costume, cuffia e tanta voglia.</p></div>
+      <div class="reveal"><h3>Entra nel branco</h3><p>Se ti piace, ti inseriamo nella squadra giusta per la tua età e il tuo livello.</p></div>
+    </div>
+    <a class="btn reveal" href="#contatti">Prenota una prova <span>→</span></a>
   </div>
 </section>
 
