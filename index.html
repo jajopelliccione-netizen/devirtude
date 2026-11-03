@@ -66,6 +66,20 @@ nav{display:flex;justify-content:space-between;align-items:center;height:78px}
 .numeri b{font-family:'Anton';font-size:clamp(2.8rem,6vw,5rem);font-weight:400;display:block;line-height:1;color:var(--arancio)}
 .numeri span{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grigio)}
 
+
+/* PROMOZIONE */
+.promo-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center}
+.promo h2.display .out{color:transparent;-webkit-text-stroke:2px #fff}
+.promo h2.display .or{color:var(--arancio)}
+.promo p{color:var(--grigio);margin-top:1.6rem;max-width:34rem}
+.promo p b{color:#fff}
+.promo .btn{margin-top:2rem}
+.promo-foto{position:relative;display:block}
+.promo-foto img{width:100%;border-radius:18px;position:relative;z-index:1;transform:rotate(2deg);transition:transform .4s}
+.promo-foto::before{content:"";position:absolute;inset:0;border:3px solid var(--arancio);border-radius:18px;transform:rotate(-3deg) translate(-10px,10px)}
+.promo-foto:hover img{transform:rotate(0)}
+.promo-stamp{position:absolute;z-index:2;left:-14px;bottom:-18px;background:var(--arancio);font-family:'Anton';text-transform:uppercase;font-size:1.5rem;padding:.5rem 1.2rem;transform:rotate(-4deg);letter-spacing:.04em}
+
 /* VALORI - righe numerate */
 .valori{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
 .row{display:grid;grid-template-columns:90px 1fr 1.2fr;gap:2rem;align-items:baseline;padding:2rem 0;border-top:1px solid var(--linea);transition:.3s;position:relative}
@@ -140,6 +154,7 @@ footer img{width:46px}
   .row{grid-template-columns:50px 1fr;gap:.6rem 1rem}
   .row p{grid-column:2}
   .valori,.cal{padding:8rem 0}
+  .promo-grid{grid-template-columns:1fr;gap:3rem}
   .gal{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
   .gal a:nth-child(1){grid-column:span 2}
   .gal a:nth-child(6){grid-column:span 2}
@@ -200,6 +215,22 @@ footer img{width:46px}
       <div><b>100%</b><span>Grinta</span></div>
       <div><b>1</b><span>Grande famiglia</span></div>
     </div>
+  </div>
+</section>
+
+<section class="promo" id="promozione">
+  <div class="wrap promo-grid">
+    <div>
+      <div class="kicker reveal">Stagione scorsa</div>
+      <h2 class="display reveal"><span class="out">Promossi</span><br><span class="or">in Serie B</span></h2>
+      <p class="reveal"><b>L'abbiamo fatto.</b> Dopo una stagione di sacrificio, allenamenti e tanta fame, Roma De Virtute ha conquistato la promozione in Serie B. Una vittoria di tutto il branco: giocatori, staff, famiglie e tifosi.</p>
+      <p class="reveal">E adesso si riparte, più forti, con una categoria in più da ruggire.</p>
+      <a class="btn reveal" href="https://www.instagram.com/p/DZ2QYAVCLNv/" target="_blank" rel="noopener">Guarda il video <span>↗</span></a>
+    </div>
+    <a class="promo-foto reveal" href="https://www.instagram.com/p/DZ2QYAVCLNv/" target="_blank" rel="noopener">
+      <img src="assets/instagram/foto-1.jpg" alt="La squadra festeggia la promozione in Serie B">
+      <span class="promo-stamp">Serie B</span>
+    </a>
   </div>
 </section>
 
@@ -279,7 +310,7 @@ document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>d
 const gal=document.getElementById('gal');
 for(let i=1;i<=6;i++){
   const a=document.createElement('a');
-  a.href='https://www.instagram.com/romadevirtude/';a.target='_blank';a.rel='noopener';
+  a.href=i===1?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/romadevirtude/';a.target='_blank';a.rel='noopener';
   const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
   img.onerror=()=>{a.classList.add('vuota');img.src='assets/logo.png';img.onerror=null};
   a.appendChild(img);gal.appendChild(a);
