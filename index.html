@@ -8,297 +8,284 @@
 <link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --nero:#111111;
-  --carbone:#1c1c1c;
-  --grafite:#272727;
-  --arancio:#e8590c;
-  --arancio-chiaro:#ff8a1f;
-  --bianco:#ffffff;
-  --grigio:#b9b9b9;
-}
+:root{--nero:#0d0d0d;--grafite:#1a1a1a;--arancio:#f25c05;--bianco:#fff;--grigio:#9a9a9a;--linea:#2c2c2c}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--nero);color:var(--bianco);line-height:1.6;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
-.container{width:min(1140px,100% - 2rem);margin-inline:auto}
-section{padding:5.5rem 0;position:relative}
-
-/* Strisce tigre decorative */
-.stripes{
-  background:
-    repeating-linear-gradient(115deg,transparent 0 46px,rgba(232,89,12,.14) 46px 62px,transparent 62px 120px),
-    var(--nero);
-}
-.stripes-dark{
-  background:
-    repeating-linear-gradient(65deg,transparent 0 60px,rgba(232,89,12,.09) 60px 74px,transparent 74px 150px),
-    var(--carbone);
-}
+.wrap{width:min(1200px,100% - 2.5rem);margin-inline:auto}
+.display{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.92;font-weight:400}
+.kicker{font-weight:700;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--arancio);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.kicker::before{content:"";width:40px;height:2px;background:var(--arancio)}
+h2.display{font-size:clamp(3rem,8vw,6.5rem)}
+section{padding:7rem 0}
 
 /* NAV */
-header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(17,17,17,.88);backdrop-filter:blur(10px);border-bottom:3px solid var(--arancio)}
-nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:.7rem;font-family:'Anton';font-size:1.25rem;letter-spacing:.05em;text-transform:uppercase}
-.brand img{width:44px;height:44px}
-.menu{display:flex;gap:1.6rem;list-style:none}
-.menu a{font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grigio);transition:color .2s}
-.menu a:hover{color:var(--arancio-chiaro)}
-.burger{display:none;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer}
+header{position:fixed;inset:0 0 auto;z-index:50;mix-blend-mode:normal}
+nav{display:flex;justify-content:space-between;align-items:center;height:78px}
+.brand img{width:52px;height:52px;transition:transform .4s}
+.brand:hover img{transform:rotate(-12deg) scale(1.08)}
+.menu{display:flex;gap:2rem;list-style:none;background:rgba(13,13,13,.75);backdrop-filter:blur(10px);padding:.7rem 1.6rem;border-radius:50px;border:1px solid var(--linea)}
+.menu a{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);transition:color .2s}
+.menu a:hover{color:var(--arancio)}
+.burger{display:none;background:var(--arancio);border:0;color:#fff;width:46px;height:46px;border-radius:50%;font-size:1.3rem;cursor:pointer}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;overflow:hidden}
-.hero::before{content:"";position:absolute;right:-12%;top:50%;width:min(720px,90vw);aspect-ratio:1;transform:translateY(-50%);
-  background:url(assets/logo.png) center/contain no-repeat;opacity:.1;filter:grayscale(.3)}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative}
-.tag{display:inline-block;background:var(--arancio);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;padding:.35rem .9rem;border-radius:3px;margin-bottom:1.2rem;transform:skewX(-8deg)}
-.hero h1{font-size:clamp(3.2rem,9vw,7rem)}
-.hero h1 span{color:var(--arancio)}
-.hero p{max-width:34rem;color:var(--grigio);font-size:1.1rem;margin:1.4rem 0 2rem}
-.btns{display:flex;flex-wrap:wrap;gap:1rem}
-.btn{display:inline-block;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.88rem;padding:.95rem 1.8rem;border-radius:4px;border:2px solid var(--arancio);transition:.2s}
-.btn-primary{background:var(--arancio)}
-.btn-primary:hover{background:var(--arancio-chiaro);border-color:var(--arancio-chiaro);transform:translateY(-2px)}
-.btn-ghost:hover{background:var(--arancio);transform:translateY(-2px)}
-.hero-logo{display:flex;justify-content:center}
-.hero-logo img{width:min(420px,80%);border-radius:50%;box-shadow:0 0 0 8px var(--arancio),0 25px 70px rgba(232,89,12,.35);animation:float 6s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-14px) rotate(2deg)}}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 75% 40%,rgba(242,92,5,.28),transparent 60%),var(--nero)}
+.hero-logo{position:absolute;right:6%;top:105px;width:min(340px,28vw);border-radius:50%;
+  box-shadow:0 0 0 10px var(--nero),0 0 0 14px var(--arancio),0 40px 90px rgba(0,0,0,.6);animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-text{position:relative;padding:0 0 6rem}
+.hero h1{font-size:clamp(4.5rem,17vw,15rem)}
+.hero h1 .out{color:transparent;-webkit-text-stroke:2px #fff}
+.hero h1 .or{color:var(--arancio)}
+.hero-sub{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:2.2rem;border-top:1px solid var(--linea);padding-top:1.6rem}
+.hero-sub p{max-width:30rem;color:var(--grigio)}
+.btn{display:inline-flex;align-items:center;gap:.7rem;background:var(--arancio);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;padding:1.05rem 2rem;border-radius:50px;transition:.25s}
+.btn:hover{background:#fff;color:var(--nero);gap:1.2rem}
+.btn.line{background:none;border:2px solid #fff}
+.btn.line:hover{background:#fff}
 
-/* ONDA */
-.wave{position:absolute;left:0;bottom:-1px;width:100%;height:60px;display:block}
-
-/* TITOLI SEZIONE */
-.sec-title{margin-bottom:3rem}
-.sec-title small{display:block;color:var(--arancio);font-weight:700;letter-spacing:.25em;text-transform:uppercase;font-size:.8rem;margin-bottom:.5rem}
-.sec-title h2{font-size:clamp(2.3rem,5vw,3.6rem)}
-.sec-title h2::after{content:"";display:block;width:90px;height:6px;background:var(--arancio);margin-top:1rem;transform:skewX(-25deg)}
+/* TICKER */
+.ticker{background:var(--arancio);overflow:hidden;white-space:nowrap;transform:rotate(-1.5deg);margin:0 -2rem;padding:1rem 0;position:relative;z-index:2}
+.ticker div{display:inline-block;animation:scroll 28s linear infinite;font-family:'Anton';font-size:1.8rem;text-transform:uppercase;letter-spacing:.06em}
+.ticker span{margin:0 1.6rem}
+.ticker i{font-style:normal;color:var(--nero)}
+@keyframes scroll{to{transform:translateX(-50%)}}
 
 /* CHI SIAMO */
-.about{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}
-.about p{color:var(--grigio);margin-bottom:1rem}
-.about p strong{color:#fff}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.stat{background:var(--grafite);border-left:5px solid var(--arancio);padding:1.4rem 1.2rem;border-radius:4px}
-.stat b{font-family:'Anton';font-size:2.6rem;color:var(--arancio-chiaro);display:block;line-height:1}
-.stat span{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--grigio)}
+.about p.big{font-family:'Anton';font-size:clamp(1.9rem,4.6vw,3.6rem);text-transform:uppercase;line-height:1.08;max-width:60rem}
+.about p.big em{font-style:normal;color:var(--arancio)}
+.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3.5rem;color:var(--grigio);max-width:60rem}
+.numeri{display:grid;grid-template-columns:repeat(4,1fr);margin-top:5rem;border-top:1px solid var(--linea)}
+.numeri div{padding:2rem 1rem 0 0}
+.numeri b{font-family:'Anton';font-size:clamp(2.8rem,6vw,5rem);font-weight:400;display:block;line-height:1;color:var(--arancio)}
+.numeri span{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grigio)}
 
-/* VALORI */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
-.card{background:var(--grafite);padding:2rem 1.6rem;border-radius:6px;border-top:4px solid var(--arancio);transition:.25s}
-.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(232,89,12,.25)}
-.card .ico{font-size:2.2rem;margin-bottom:.8rem}
-.card h3{font-size:1.5rem;margin-bottom:.6rem}
-.card p{color:var(--grigio);font-size:.96rem}
+/* VALORI - righe numerate */
+.valori{background:var(--grafite);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:11rem 0}
+.row{display:grid;grid-template-columns:90px 1fr 1.2fr;gap:2rem;align-items:baseline;padding:2rem 0;border-top:1px solid var(--linea);transition:.3s;position:relative}
+.row:last-child{border-bottom:1px solid var(--linea)}
+.row .n{font-family:'Anton';color:var(--arancio);font-size:1.4rem}
+.row h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(2rem,5vw,3.8rem);line-height:1;transition:.3s}
+.row p{color:var(--grigio)}
+.row:hover{padding-left:1.2rem}
+.row:hover h3{color:var(--arancio)}
 
 /* SQUADRE */
-.team{display:flex;flex-direction:column;gap:.3rem}
-.team .age{font-family:'Anton';font-size:3.4rem;color:transparent;-webkit-text-stroke:2px var(--arancio);line-height:1}
+.sq{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.sq-item{position:relative;border:2px solid var(--linea);border-radius:22px;padding:2.2rem 1.8rem 2rem;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:.3s}
+.sq-item::before{content:attr(data-n);position:absolute;top:-1.2rem;right:1rem;font-family:'Anton';font-size:9rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--linea);transition:.3s}
+.sq-item:hover{border-color:var(--arancio);transform:translateY(-6px)}
+.sq-item:hover::before{-webkit-text-stroke-color:var(--arancio)}
+.sq-item h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:2.4rem;line-height:1;margin-bottom:.6rem;position:relative}
+.sq-item p{color:var(--grigio);position:relative}
 
-/* COSTUME */
-.kit{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.kit figure{background:#fff;border-radius:8px;overflow:hidden;border:4px solid var(--arancio);position:relative}
-.kit figcaption{position:absolute;left:0;bottom:0;background:var(--nero);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .9rem}
-.kit img{width:100%;height:100%;object-fit:cover}
-.kit-text{max-width:42rem;color:var(--grigio);margin-bottom:2.5rem}
+/* GALLERIA */
+.gal-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:.8rem}
+.gal a{position:relative;overflow:hidden;border-radius:14px;background:var(--grafite);display:block}
+.gal a:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal a:nth-child(4){grid-row:span 2}
+.gal a:nth-child(6){grid-column:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gal a:hover img{transform:scale(1.07)}
+.gal a::after{content:"Instagram ↗";position:absolute;inset:auto 0 0 0;padding:1.4rem 1rem .8rem;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(transparent,rgba(0,0,0,.85));opacity:0;transition:.3s}
+.gal a:hover::after{opacity:1}
+.gal a.vuota{display:flex;align-items:center;justify-content:center;border:2px dashed var(--linea)}
+.gal a.vuota img{width:40%;height:auto;opacity:.25;filter:grayscale(1);object-fit:contain}
+.gal a.vuota::after{display:none}
 
 /* CALENDARIO */
-.matches{display:grid;gap:1rem}
-.match{display:grid;grid-template-columns:90px 1fr auto;gap:1.4rem;align-items:center;background:var(--grafite);padding:1.1rem 1.4rem;border-radius:6px;border-left:5px solid var(--arancio)}
-.date{text-align:center;font-family:'Anton';line-height:1}
-.date b{display:block;font-size:2.2rem;color:var(--arancio-chiaro)}
-.date span{font-size:.9rem;letter-spacing:.1em;color:var(--grigio)}
-.match h3{font-size:1.35rem}
-.match p{color:var(--grigio);font-size:.9rem}
-.badge{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border:2px solid var(--arancio);padding:.3rem .8rem;border-radius:20px;white-space:nowrap}
-.note{margin-top:1.2rem;color:var(--grigio);font-size:.85rem;font-style:italic}
-
-/* CTA */
-.cta{text-align:center;background:var(--arancio);color:#fff;padding:4.5rem 0;position:relative;overflow:hidden}
-.cta::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 50px,rgba(0,0,0,.14) 50px 70px,transparent 70px 140px)}
-.cta .container{position:relative}
-.cta h2{font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:1rem}
-.cta p{max-width:36rem;margin:0 auto 2rem;font-weight:500}
-.cta .btn{background:var(--nero);border-color:var(--nero)}
-.cta .btn:hover{background:#fff;color:var(--nero);border-color:#fff}
+.cal{background:var(--arancio);color:var(--nero);clip-path:polygon(0 0,100% 4vw,100% 100%,0 calc(100% - 4vw));padding:11rem 0}
+.cal .kicker{color:var(--nero)}
+.cal .kicker::before{background:var(--nero)}
+.m{display:grid;grid-template-columns:130px 1fr auto;gap:2rem;align-items:center;padding:1.6rem 0;border-top:2px solid var(--nero)}
+.m:last-of-type{border-bottom:2px solid var(--nero)}
+.m .d{font-family:'Anton';font-size:2.6rem;line-height:1}
+.m h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.1}
+.m p{font-size:.9rem;font-weight:500;opacity:.75}
+.tag{background:var(--nero);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:50px}
+.cal .nota{margin-top:1.4rem;font-size:.85rem;font-weight:600}
 
 /* CONTATTI */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.info li{list-style:none;margin-bottom:1.1rem;display:flex;gap:.9rem;color:var(--grigio)}
-.info li b{color:#fff;display:block}
-form{display:grid;gap:1rem}
-input,textarea{width:100%;background:var(--grafite);border:2px solid #3a3a3a;color:#fff;padding:.9rem 1rem;border-radius:4px;font:inherit;transition:border-color .2s}
-input:focus,textarea:focus{outline:none;border-color:var(--arancio)}
-textarea{min-height:130px;resize:vertical}
-form button{cursor:pointer;font-family:inherit}
+.contatti .grande{display:block;font-family:'Anton';text-transform:uppercase;font-size:clamp(2.2rem,7.5vw,6.5rem);line-height:1;margin:1rem 0 3.5rem;word-break:break-word;transition:color .25s}
+.contatti .grande:hover{color:var(--arancio)}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:1px solid var(--linea);padding-top:2rem}
+.info b{display:block;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--arancio);margin-bottom:.4rem}
+.info span{color:var(--grigio)}
 
 /* FOOTER */
-footer{background:#000;border-top:4px solid var(--arancio);padding:2.5rem 0;text-align:center;color:var(--grigio);font-size:.88rem}
-footer img{width:70px;margin:0 auto .8rem}
-footer .motto{font-family:'Anton';color:#fff;letter-spacing:.15em;text-transform:uppercase;font-size:1.1rem;margin-bottom:.4rem}
+footer{border-top:1px solid var(--linea);padding:2.5rem 0;color:var(--grigio);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer img{width:46px}
 
-/* Reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:.7s}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
 
-@media (max-width:860px){
-  .hero-grid,.about,.contact,.kit{grid-template-columns:1fr}
-  .hero-logo{order:-1}
-  .hero-logo img{width:min(260px,65%)}
+@media(max-width:860px){
+  section{padding:4.5rem 0}
   .burger{display:block}
-  .menu{position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--nero);padding:1.2rem 1.5rem;gap:1.1rem;border-bottom:3px solid var(--arancio);display:none}
+  .menu{display:none;position:absolute;top:78px;right:1.25rem;flex-direction:column;border-radius:20px;gap:1rem;padding:1.4rem 1.8rem}
   .menu.open{display:flex}
-  .match{grid-template-columns:70px 1fr;}
-  .match .badge{grid-column:2;justify-self:start}
-  section{padding:4rem 0}
+  .hero-logo{width:56vw;right:50%;transform:translate(50%,0);top:100px;animation:none}
+  .hero-text{padding-bottom:3.5rem}
+  .hero h1{font-size:clamp(4rem,21vw,8rem)}
+  .about .cols,.sq,.info{grid-template-columns:1fr}
+  .numeri{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:50px 1fr;gap:.6rem 1rem}
+  .row p{grid-column:2}
+  .valori,.cal{padding:8rem 0}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
+  .gal a:nth-child(1){grid-column:span 2}
+  .gal a:nth-child(6){grid-column:span 2}
+  .m{grid-template-columns:80px 1fr;gap:.8rem 1rem}
+  .m .d{font-size:1.9rem}
+  .m .tag{grid-column:2;justify-self:start}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
 <header>
-  <nav class="container">
-    <a href="#home" class="brand"><img src="assets/logo.png" alt="Logo Roma De Virtute"> Roma De Virtute</a>
-    <button class="burger" aria-label="Apri menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  <nav class="wrap">
+    <a href="#home" class="brand"><img src="assets/logo.png" alt="Roma De Virtute"></a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">≡</button>
     <ul class="menu" id="menu">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#squadre">Squadre</a></li>
-      <li><a href="#costume">Il costume</a></li>
+      <li><a href="#foto">Foto</a></li>
       <li><a href="#calendario">Calendario</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero stripes" id="home">
-  <div class="container hero-grid">
-    <div>
-      <span class="tag">Società di Pallanuoto</span>
-      <h1>Roma<br><span>De Virtute</span></h1>
-      <p>Coraggio, grinta e spirito di squadra. Quando la tigre entra in acqua, non si molla mai. Vieni a giocare con noi.</p>
-      <div class="btns">
-        <a href="#contatti" class="btn btn-primary">Unisciti al branco</a>
-        <a href="#calendario" class="btn btn-ghost">Prossime partite</a>
+<section class="hero" id="home">
+  <img class="hero-logo" src="assets/logo.png" alt="Logo Roma De Virtute con tigre e pallone">
+  <div class="wrap hero-text">
+    <h1 class="display"><span class="out">Roma</span><br><span class="or">De Virtute</span></h1>
+    <div class="hero-sub">
+      <p>Società di pallanuoto. Coraggio, grinta e spirito di squadra: quando la tigre entra in acqua, non molla mai.</p>
+      <a href="#contatti" class="btn">Unisciti al branco <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<div style="overflow:hidden;padding:1.5rem 0"><div class="ticker" aria-hidden="true">
+  <div>
+    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
+    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
+    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
+    <span>Roma De Virtute</span><i>●</i><span>Pallanuoto</span><i>●</i><span>Forza</span><i>●</i><span>Coraggio</span><i>●</i><span>Squadra</span><i>●</i>
+  </div>
+</div></div>
+
+<section class="about" id="chi-siamo">
+  <div class="wrap">
+    <div class="kicker reveal">Chi siamo</div>
+    <p class="big reveal">Non siamo solo una squadra. Siamo un branco che nuota, lotta e <em>vince insieme</em>, dalla prima bracciata al fischio finale.</p>
+    <div class="cols reveal">
+      <p><b style="color:#fff">Roma De Virtute</b> nasce dalla passione per la pallanuoto e dalla voglia di crescere insieme, dentro e fuori dalla vasca.</p>
+      <p>"De Virtute", per virtù: impegno, rispetto e sacrificio. La tigre sul nostro stemma è il nostro simbolo, forza e determinazione in ogni azione.</p>
+    </div>
+    <div class="numeri reveal">
+      <div><b>7</b><span>Giocatori in acqua</span></div>
+      <div><b>4×8'</b><span>Tempi di gioco</span></div>
+      <div><b>100%</b><span>Grinta</span></div>
+      <div><b>1</b><span>Grande famiglia</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="valori">
+  <div class="wrap">
+    <div class="kicker reveal">I nostri valori</div>
+    <h2 class="display reveal" style="margin-bottom:3rem">Lo spirito<br>della tigre</h2>
+    <div class="row reveal"><span class="n">01</span><h3>Coraggio</h3><p>Affrontiamo ogni sfida a testa alta, in vasca e nella vita.</p></div>
+    <div class="row reveal"><span class="n">02</span><h3>Squadra</h3><p>Si vince e si perde insieme. Il gruppo viene prima del singolo.</p></div>
+    <div class="row reveal"><span class="n">03</span><h3>Sacrificio</h3><p>Allenamento, costanza e disciplina: la base di ogni risultato.</p></div>
+    <div class="row reveal"><span class="n">04</span><h3>Passione</h3><p>La pallanuoto è lo sport più duro che ci sia, e per questo lo amiamo.</p></div>
+  </div>
+</section>
+
+<section id="squadre">
+  <div class="wrap">
+    <div class="kicker reveal">Le categorie</div>
+    <h2 class="display reveal">Le nostre<br>squadre</h2>
+    <div class="sq">
+      <div class="sq-item reveal" data-n="01"><h3>Settore giovanile</h3><p>Corsi e squadre per i ragazzi che vogliono imparare la pallanuoto e crescere con noi.</p></div>
+      <div class="sq-item reveal" data-n="02"><h3>Prima squadra</h3><p>Il gruppo dei grandi, pronto a dare battaglia in ogni campionato.</p></div>
+      <div class="sq-item reveal" data-n="03"><h3>Amatori</h3><p>Per chi ama la pallanuoto a ogni età, con spirito sportivo e tanto divertimento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="foto" style="padding-top:2rem">
+  <div class="wrap">
+    <div class="gal-head reveal">
+      <div>
+        <div class="kicker">Dal nostro Instagram</div>
+        <h2 class="display">Il branco<br>in azione</h2>
       </div>
+      <a class="btn line" href="https://www.instagram.com/romadevirtude/" target="_blank" rel="noopener">Seguici su Instagram <span>↗</span></a>
     </div>
-    <div class="hero-logo"><img src="assets/logo.png" alt="Logo Roma De Virtute con tigre e pallone"></div>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#1c1c1c" d="M0,30 C240,70 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z"/></svg>
-</section>
-
-<!-- CHI SIAMO -->
-<section id="chi-siamo" class="stripes-dark">
-  <div class="container about">
-    <div class="reveal">
-      <div class="sec-title"><small>La nostra storia</small><h2>Chi siamo</h2></div>
-      <p><strong>Roma De Virtute</strong> è una società di pallanuoto nata dalla passione per lo sport e dalla voglia di crescere insieme, dentro e fuori dalla vasca.</p>
-      <p>Il nostro nome racchiude la nostra filosofia: <strong>"De Virtute"</strong>, per virtù. Crediamo in un gruppo che si costruisce con impegno, rispetto e sacrificio, in cui ogni atleta conta.</p>
-      <p>La tigre sul nostro stemma ci rappresenta: forza, velocità e determinazione in ogni azione, dalla prima bracciata al fischio finale.</p>
-    </div>
-    <div class="stats reveal">
-      <div class="stat"><b>7</b><span>Giocatori in acqua</span></div>
-      <div class="stat"><b>4×8'</b><span>Tempi di gioco</span></div>
-      <div class="stat"><b>100%</b><span>Grinta</span></div>
-      <div class="stat"><b>1</b><span>Grande famiglia</span></div>
-    </div>
+    <!-- Metti le foto in assets/instagram/ chiamandole foto-1.jpg ... foto-6.jpg -->
+    <div class="gal reveal" id="gal"></div>
   </div>
 </section>
 
-<!-- VALORI -->
-<section class="stripes">
-  <div class="container">
-    <div class="sec-title reveal"><small>I nostri valori</small><h2>Lo spirito della tigre</h2></div>
-    <div class="cards">
-      <div class="card reveal"><div class="ico">🐯</div><h3>Coraggio</h3><p>Affrontiamo ogni sfida a testa alta, in vasca e nella vita.</p></div>
-      <div class="card reveal"><div class="ico">🤝</div><h3>Squadra</h3><p>Si vince e si perde insieme. Il gruppo viene sempre prima del singolo.</p></div>
-      <div class="card reveal"><div class="ico">💪</div><h3>Sacrificio</h3><p>Allenamento, costanza e disciplina sono la base di ogni risultato.</p></div>
-      <div class="card reveal"><div class="ico">🤽</div><h3>Passione</h3><p>La pallanuoto è lo sport più duro che ci sia, e per questo lo amiamo.</p></div>
-    </div>
+<section class="cal" id="calendario">
+  <div class="wrap">
+    <div class="kicker reveal">In vasca</div>
+    <h2 class="display reveal" style="margin-bottom:3rem">Calendario</h2>
+    <div class="m reveal"><span class="d">-- / --</span><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Casa</span></div>
+    <div class="m reveal"><span class="d">-- / --</span><div><h3>Avversario vs Roma De Virtute</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Trasferta</span></div>
+    <div class="m reveal"><span class="d">-- / --</span><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="tag">Casa</span></div>
+    <p class="nota">Le date delle prossime partite verranno pubblicate a breve.</p>
   </div>
 </section>
 
-<!-- SQUADRE -->
-<section id="squadre" class="stripes-dark">
-  <div class="container">
-    <div class="sec-title reveal"><small>Tutte le categorie</small><h2>Le nostre squadre</h2></div>
-    <div class="cards">
-      <div class="card team reveal"><span class="age">Under</span><h3>Settore giovanile</h3><p>Corsi e squadre per ragazzi che vogliono imparare la pallanuoto e crescere con noi.</p></div>
-      <div class="card team reveal"><span class="age">Prima</span><h3>Prima squadra</h3><p>Il gruppo dei grandi, pronto a dare battaglia in ogni campionato.</p></div>
-      <div class="card team reveal"><span class="age">Master</span><h3>Amatori</h3><p>Per chi ama la pallanuoto a ogni età, con spirito sportivo e tanto divertimento.</p></div>
+<section class="contatti" id="contatti">
+  <div class="wrap">
+    <div class="kicker reveal">Contatti</div>
+    <h2 class="display reveal">Vuoi giocare<br>con noi?</h2>
+    <a class="grande reveal" href="mailto:info@romadevirtude.it">info@romadevirtude.it ↗</a>
+    <div class="info reveal">
+      <div><b>Dove ci alleniamo</b><span>Roma · indirizzo piscina da inserire</span></div>
+      <div><b>Telefono</b><span>+39 000 000 0000</span></div>
+      <div><b>Instagram</b><a href="https://www.instagram.com/romadevirtude/" target="_blank" rel="noopener"><span>@romadevirtude</span></a></div>
     </div>
-  </div>
-</section>
-
-<!-- COSTUME -->
-<section id="costume" class="stripes">
-  <div class="container">
-    <div class="sec-title reveal"><small>Divisa ufficiale</small><h2>Il costume della tigre</h2></div>
-    <p class="kit-text reveal">Strisce nere e arancioni, graffi bianchi e il ruggito della tigre sul retro. Il nostro costume ufficiale non passa inosservato: quando ci vedi arrivare in acqua, sai già chi siamo.</p>
-    <div class="kit reveal">
-      <figure><img src="assets/costume-front.jpg" alt="Costume Roma De Virtute – fronte" loading="lazy"><figcaption>Fronte</figcaption></figure>
-      <figure><img src="assets/costume-back.jpg" alt="Costume Roma De Virtute – retro con tigre" loading="lazy"><figcaption>Retro</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- CALENDARIO -->
-<section id="calendario" class="stripes-dark">
-  <div class="container">
-    <div class="sec-title reveal"><small>In vasca</small><h2>Calendario</h2></div>
-    <div class="matches">
-      <div class="match reveal"><div class="date"><b>--</b><span>MESE</span></div><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="badge">Casa</span></div>
-      <div class="match reveal"><div class="date"><b>--</b><span>MESE</span></div><div><h3>Avversario vs Roma De Virtute</h3><p>Piscina da definire · ore --:--</p></div><span class="badge">Trasferta</span></div>
-      <div class="match reveal"><div class="date"><b>--</b><span>MESE</span></div><div><h3>Roma De Virtute vs Avversario</h3><p>Piscina da definire · ore --:--</p></div><span class="badge">Casa</span></div>
-    </div>
-    <p class="note">Le date delle prossime partite verranno pubblicate a breve.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta">
-  <div class="container">
-    <h2>Diventa una tigre</h2>
-    <p>Provare è gratis. Vieni in piscina, tuffati con noi e scopri la pallanuoto.</p>
-    <a href="#contatti" class="btn">Prenota una prova</a>
-  </div>
-</div>
-
-<!-- CONTATTI -->
-<section id="contatti" class="stripes">
-  <div class="container contact">
-    <div class="reveal">
-      <div class="sec-title"><small>Scrivici</small><h2>Contatti</h2></div>
-      <ul class="info">
-        <li>📍<div><b>Dove ci alleniamo</b>Roma · indirizzo piscina da inserire</div></li>
-        <li>✉️<div><b>Email</b>info@romadevirtude.it</div></li>
-        <li>📞<div><b>Telefono</b>+39 000 000 0000</div></li>
-        <li>📸<div><b>Social</b>Seguici su Instagram: @romadevirtude</div></li>
-      </ul>
-    </div>
-    <form class="reveal" onsubmit="event.preventDefault();this.querySelector('button').textContent='Messaggio inviato! 🐯';this.reset()">
-      <input type="text" placeholder="Nome e cognome" required>
-      <input type="email" placeholder="Email" required>
-      <textarea placeholder="Il tuo messaggio" required></textarea>
-      <button class="btn btn-primary" type="submit">Invia messaggio</button>
-    </form>
   </div>
 </section>
 
 <footer>
-  <img src="assets/logo.png" alt="Roma De Virtute">
-  <div class="motto">Roma De Virtute</div>
-  <div>© <span id="anno"></span> Roma De Virtute – Società di Pallanuoto</div>
+  <div class="wrap">
+    <img src="assets/logo.png" alt="Roma De Virtute">
+    <span>© <span id="anno"></span> Roma De Virtute · Società di Pallanuoto</span>
+  </div>
 </footer>
 
 <script>
 document.getElementById('anno').textContent=new Date().getFullYear();
 document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+
+// Galleria: carica assets/instagram/foto-N.jpg, se manca mostra un riquadro con il logo
+const gal=document.getElementById('gal');
+for(let i=1;i<=6;i++){
+  const a=document.createElement('a');
+  a.href='https://www.instagram.com/romadevirtude/';a.target='_blank';a.rel='noopener';
+  const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
+  img.onerror=()=>{a.classList.add('vuota');img.src='assets/logo.png';img.onerror=null};
+  a.appendChild(img);gal.appendChild(a);
+}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
