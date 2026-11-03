@@ -21,6 +21,6 @@ export const configurato = !String(firebaseConfig.apiKey).startsWith("INSERISCI"
 //  3. Settings > Upload > Upload presets > Add: "Signing mode" = Unsigned, nome a piacere
 // ============================================================
 export const cloudinary = {
-  cloudName: "INSERISCI_CLOUD_NAME",
-  uploadPreset: "INSERISCI_UPLOAD_PRESET"
+  cloudName: "ghckrc9u",
+  uploadPreset: "devirtude"
 };
