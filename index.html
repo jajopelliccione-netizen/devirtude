@@ -261,9 +261,12 @@ footer img{width:46px}
     <div class="kicker reveal">Le categorie</div>
     <h2 class="display reveal">Le nostre<br>squadre</h2>
     <div class="sq">
-      <div class="sq-item reveal" data-n="01"><h3>Settore giovanile</h3><p>Corsi e squadre per i ragazzi che vogliono imparare la pallanuoto e crescere con noi.</p></div>
-      <div class="sq-item reveal" data-n="02"><h3>Prima squadra</h3><p>Il gruppo dei grandi, pronto a dare battaglia in ogni campionato.</p></div>
-      <div class="sq-item reveal" data-n="03"><h3>Amatori</h3><p>Per chi ama la pallanuoto a ogni età, con spirito sportivo e tanto divertimento.</p></div>
+      <div class="sq-item reveal" data-n="01"><h3>Serie B</h3><p>La nostra squadra di punta, appena promossa e pronta a ruggire in Serie B.</p></div>
+      <div class="sq-item reveal" data-n="02"><h3>Serie D</h3><p>Il gruppo che lotta ogni settimana in campionato, con grinta e spirito di squadra.</p></div>
+      <div class="sq-item reveal" data-n="03"><h3>Cadetti</h3><p>Giovani atleti che crescono tra allenamenti, partite e sacrifici.</p></div>
+      <div class="sq-item reveal" data-n="04"><h3>Juniores</h3><p>Il ponte verso la prima squadra: talento, grinta e tanta voglia di emergere.</p></div>
+      <div class="sq-item reveal" data-n="05"><h3>Allievi</h3><p>Si impara il mestiere della pallanuoto e si costruisce il carattere.</p></div>
+      <div class="sq-item reveal" data-n="06"><h3>Ragazzi</h3><p>Il primo passo in vasca: tecnica, divertimento e spirito di squadra.</p></div>
     </div>
   </div>
 </section>
@@ -284,11 +287,11 @@ footer img{width:46px}
       <div><h3><em>04</em>Un gruppo vero</h3><p>Allenamenti, partite, terzi tempi e festeggiamenti: la squadra diventa una seconda famiglia.</p></div>
     </div>
     <div class="passi">
-      <div class="reveal"><h3>Scrivici</h3><p>Contattaci con il modulo o su Instagram e dicci la tua età e se hai già giocato.</p></div>
+      <div class="reveal"><h3>Scrivici</h3><p>Scrivici su Instagram o chiama il direttore sportivo e dicci la tua età e se hai già giocato.</p></div>
       <div class="reveal"><h3>Vieni a provare</h3><p>Ti aspettiamo in piscina per un allenamento di prova, con costume, cuffia e tanta voglia.</p></div>
       <div class="reveal"><h3>Entra nel branco</h3><p>Se ti piace, ti inseriamo nella squadra giusta per la tua età e il tuo livello.</p></div>
     </div>
-    <a class="btn reveal" href="#contatti">Prenota una prova <span>→</span></a>
+    <a class="btn reveal" href="#contatti">Contattaci <span>→</span></a>
   </div>
 </section>
 
@@ -299,7 +302,7 @@ footer img{width:46px}
         <div class="kicker">Dal nostro Instagram</div>
         <h2 class="display">Il branco<br>in azione</h2>
       </div>
-      <a class="btn line" href="https://www.instagram.com/romadevirtude/" target="_blank" rel="noopener">Seguici su Instagram <span>↗</span></a>
+      <a class="btn line" href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">Seguici su Instagram <span>↗</span></a>
     </div>
     <!-- Metti le foto in assets/instagram/ chiamandole foto-1.jpg ... foto-6.jpg -->
     <div class="gal reveal" id="gal"></div>
@@ -321,11 +324,11 @@ footer img{width:46px}
   <div class="wrap">
     <div class="kicker reveal">Contatti</div>
     <h2 class="display reveal">Vuoi giocare<br>con noi?</h2>
-    <a class="grande reveal" href="mailto:info@romadevirtude.it">info@romadevirtude.it ↗</a>
+    <a class="grande reveal" href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">@devirtuteroma ↗</a>
     <div class="info reveal">
-      <div><b>Dove ci alleniamo</b><span>Roma · indirizzo piscina da inserire</span></div>
-      <div><b>Telefono</b><span>+39 000 000 0000</span></div>
-      <div><b>Instagram</b><a href="https://www.instagram.com/romadevirtude/" target="_blank" rel="noopener"><span>@romadevirtude</span></a></div>
+      <div><b>Dove ci alleniamo</b><a href="https://www.google.com/maps/search/?api=1&query=Sporting+Village+The+Monster+Via+Polia+44-46+Roma" target="_blank" rel="noopener"><span>Sporting Village The Monster<br>Via Polia 44-46, Roma</span></a></div>
+      <div><b>Direttore sportivo</b><a href="tel:+393479292955"><span>Adriano Caresta<br>347 929 2955</span></a></div>
+      <div><b>Social</b><span><a href="https://www.instagram.com/devirtuteroma/" target="_blank" rel="noopener">Instagram @devirtuteroma</a><br><a href="https://www.youtube.com/@devirtuteroma" target="_blank" rel="noopener">YouTube @devirtuteroma</a></span></div>
     </div>
   </div>
 </section>
@@ -345,7 +348,7 @@ document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>d
 const gal=document.getElementById('gal');
 for(let i=1;i<=8;i++){
   const a=document.createElement('a');
-  a.href=i<=2?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/romadevirtude/';a.target='_blank';a.rel='noopener';
+  a.href=i<=2?'https://www.instagram.com/p/DZ2QYAVCLNv/':'https://www.instagram.com/devirtuteroma/';a.target='_blank';a.rel='noopener';
   const img=new Image();img.alt='Foto Roma De Virtute '+i;img.src='assets/instagram/foto-'+i+'.jpg';
   img.onerror=()=>a.remove();
   a.appendChild(img);gal.appendChild(a);
